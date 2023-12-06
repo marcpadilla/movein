@@ -16,10 +16,10 @@ configure_gnome_terminal() {
 # Function to install necessary packages
 install_packages() {
     # Update package lists
-    sudo apt-get update
+    sudo apt update
 
     # Install packages
-    sudo apt-get install vmfs-tools vmfs6-tools bat xxd -y
+    sudo apt install autopsy bless exfat-fuse vmfs-tools vmfs6-tools bat xxd -y
 }
 
 # Function to set desktop background color

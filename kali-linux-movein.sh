@@ -19,7 +19,7 @@ install_packages() {
     sudo apt update
 
     # Install packages
-    sudo apt install autopsy exfat-fuse vmfs-tools vmfs6-tools bat xxd -y
+    sudo apt install -y autopsy bat exfat-fuse plaso vmfs-tools vmfs6-tools xxd
 }
 
 # Function to set desktop background color

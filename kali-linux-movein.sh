@@ -1,16 +1,19 @@
 #!/bin/bash
 
-# Function to change GNOME Terminal settings
-configure_gnome_terminal() {
-    # Get the profile ID of the GNOME Terminal
-    PROFILE=$(gsettings get org.gnome.Terminal.ProfilesList default)
-    PROFILE=${PROFILE:1:-1} # remove leading and trailing single quotes
+# Function to change QTerminal settings
+configure_qterminal() {
+    # Path to the QTerminal configuration file
+    QTERM_CONFIG="$HOME/.config/qterminal.org/qterminal.ini"
 
-    # Set font size to 14
-    gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$PROFILE/ font 'Monospace 14'
+    # Check if the configuration file exists
+    if [ ! -f "$QTERM_CONFIG" ]; then
+        echo "QTerminal configuration file not found. QTerminal might not be installed."
+        return 1
+    fi
 
-    # Remove transparency (set background transparency to 100%)
-    gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$PROFILE/ background-transparency-percent 100
+    # Set font size to 14 and remove transparency
+    sed -i 's/FontSize=.*$/FontSize=14/' "$QTERM_CONFIG"
+    sed -i 's/BackgroundOpacity=.*$/BackgroundOpacity=1.0/' "$QTERM_CONFIG"
 }
 
 # Function to install necessary packages
@@ -31,7 +34,7 @@ set_desktop_background() {
 }
 
 # Main execution
-configure_gnome_terminal
+configure_qterminal
 install_packages
 set_desktop_background
 
